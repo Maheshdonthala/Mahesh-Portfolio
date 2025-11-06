@@ -51,7 +51,7 @@ const Experience = () => {
         'Developed React frontend skills',
         'Built full-stack web applications'
       ],
-  color: '#059669'
+  color: '#6d28d9'
     }
   ];
 

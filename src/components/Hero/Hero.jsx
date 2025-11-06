@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Hero.module.css';
-import profileImage from '../../images/profile.jpg';
+import profileImage from '../../images/profile.png';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,8 +26,35 @@ const Hero = () => {
   return (
     <section id="hero" className={styles.hero}>
       <div className={styles.heroContainer}>
-        {/* Left Side - Content */}
-        <div className={`${styles.heroContent} ${isVisible ? styles.fadeInLeft : ''}`}>
+        {/* Left Side - Visual */}
+        <div className={`${styles.heroVisual} ${isVisible ? styles.fadeInLeft : ''}`}>
+          <div className={styles.visualContent}>
+            <div className={styles.profileCard}>
+              <div className={styles.profileImage}>
+                <img 
+                  src={profileImage} 
+                  alt="Mahesh Donthala"
+                  className={styles.profilePhoto}
+                />
+              </div>
+            </div>
+
+            <div className={styles.skillBadges}>
+              <span className={styles.badge}>
+                <i className="fab fa-aws"></i> AWS
+              </span>
+              <span className={styles.badge}>
+                <i className="fab fa-docker"></i> Docker
+              </span>
+              <span className={styles.badge}>
+                <i className="fas fa-code"></i> DevOps
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Side - Content */}
+        <div className={`${styles.heroContent} ${isVisible ? styles.fadeInRight : ''}`}>
           <div className={styles.greeting}>
             <span className={styles.wave}>👋</span>
             <span>Hello, I'm</span>
@@ -47,8 +74,10 @@ const Hero = () => {
           </div>
 
           <p className={styles.heroDescription}>
-            Passionate about cloud technologies, automation, and building scalable systems.
-            Specialized in AWS, Docker, Kubernetes, and CI/CD pipelines.
+            Highly motivated Software Engineering graduate with strong proficiency in SQL, Shell
+Scripting, Linux and AWS. Eager to apply academic knowledge and technical skills in an
+entry-level software engineering role. Demonstrated ability to coding, problem-solving
+skills, teamwork, and aim to contribute to an organization.
           </p>
 
           <div className={styles.heroStats}>
@@ -75,41 +104,6 @@ const Hero = () => {
               <i className="fas fa-briefcase"></i>
               View Projects
             </button>
-          </div>
-        </div>
-
-        {/* Right Side - Visual */}
-        <div className={`${styles.heroVisual} ${isVisible ? styles.fadeInRight : ''}`}>
-          <div className={styles.visualContent}>
-            <div className={styles.profileCard}>
-              <div className={styles.profileImage}>
-                <img 
-                  src={profileImage} 
-                  alt="Mahesh Donthala"
-                  className={styles.profilePhoto}
-                />
-              </div>
-              <div className={styles.profileInfo}>
-                <h3>Mahesh Donthala</h3>
-                <p>Developer | DevOps & SRE Engineer</p>
-                <div className={styles.location}>
-                  <i className="fas fa-map-marker-alt"></i>
-                  Bengaluru, India
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.skillBadges}>
-              <span className={styles.badge}>
-                <i className="fab fa-aws"></i> AWS
-              </span>
-              <span className={styles.badge}>
-                <i className="fab fa-docker"></i> Docker
-              </span>
-              <span className={styles.badge}>
-                <i className="fas fa-code"></i> DevOps
-              </span>
-            </div>
           </div>
         </div>
       </div>
