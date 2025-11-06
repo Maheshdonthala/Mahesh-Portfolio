@@ -2,6 +2,10 @@
 
 A modern, responsive React.js portfolio website showcasing professional work, skills, and experience. Built with Vite for fast development and optimized performance.
 
+## 🌐 Live Demo
+
+**[View Portfolio](https://mahesh-portfolio-vercel.vercel.app)** *(Will be available after Vercel deployment)*
+
 ## 🚀 Features
 
 - **Modern Design**: Clean, professional design with smooth animations
@@ -104,6 +108,41 @@ npm run build
 ```bash
 npm run preview
 ```
+
+## 🚀 Deployment
+
+### Deploy to Vercel (Recommended)
+
+1. **Push your code to GitHub** (already done)
+
+2. **Connect to Vercel**
+   - Go to [vercel.com](https://vercel.com) and sign up/login
+   - Click "New Project"
+   - Import your GitHub repository: `Maheshdonthala/Mahesh-Portfolio`
+
+3. **Configure deployment**
+   - Framework Preset: **Vite**
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+   - Install Command: `npm install`
+
+4. **Deploy**
+   - Click "Deploy" - Vercel will automatically build and deploy
+   - Your portfolio will be live at: `https://your-project-name.vercel.app`
+
+### Manual Deployment Steps
+
+If deploying elsewhere, the built files will be in the `dist/` folder after running:
+
+```bash
+npm run build
+```
+
+### Environment Setup
+
+This project includes:
+- `vercel.json` - Vercel configuration for SPA routing
+- Optimized build settings for production deployment
 
 ## 🎨 Customization
 
