@@ -121,9 +121,9 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 5rem; /* move call-to-action buttons slightly down */
-  transform: translateX(16px); /* nudge buttons a little to the right */
+  justify-content: flex-start; /* align buttons to the left on desktop */
+  margin-top: 0.25rem; /* slight spacing from content above */
+  transform: none; /* no lateral nudge */
 }
 
 /* Buttons */
@@ -182,11 +182,15 @@
   position: relative;
 }
 
+/* nameBackdrop removed per request */
+
 .profileCard {
   display: flex;
   align-items: center;
   gap: 2rem;
   text-align: left;
+  position: relative;
+  z-index: 2; /* ensure photo sits above backdrop */
 }
 
 .profileImage {
@@ -369,9 +373,9 @@
   }
 
   .heroButtons {
-    justify-content: center;
-    margin-top: 0.75rem; /* slightly tighter on tablets */
-    transform: none; /* keep centered on tablets */
+    justify-content: flex-start; /* align left on tablets */
+    margin-top: 0.25rem;
+    transform: none;
   }
 
   .skillBadges {
@@ -395,10 +399,10 @@
   }
 
   .heroButtons {
-    justify-content: center;
+    justify-content: flex-start; /* align left on phones */
     flex-wrap: wrap;
-    transform: none; /* keep centered on phones */
-    margin-top: 0.75rem;
+    transform: none;
+    margin-top: 0.25rem;
   }
 
   .skillBadges {

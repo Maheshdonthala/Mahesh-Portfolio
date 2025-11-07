@@ -36,8 +36,6 @@ const Skills = () => {
         { name: 'Adobe Premiere Pro', level: 85 },
         { name: 'Video Post-Production', level: 80 },
         { name: 'Film Editing', level: 75 },
-        { name: 'Thumbnail Design', level: 70 },
-        { name: 'Poster Design', level: 70 },
         { name: 'Advertisement Creation', level: 75 }
       ]
     }
@@ -58,15 +56,13 @@ const Skills = () => {
               <div className={styles.skillList}>
                 {category.skills.map((skill, skillIndex) => (
                   <div key={skillIndex} className={styles.skillItem}>
-                    <div className={styles.skillHeader}>
-                      <span className={styles.skillName}>{skill.name}</span>
-                      <span className={styles.skillPercentage}>{skill.level}%</span>
-                    </div>
-                    <div className={styles.skillBar}>
-                      <div
-                        className={styles.skillProgress}
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
+                    <span className={styles.skillName}>{skill.name}</span>
+                    <div
+                      className={styles.circularMeter}
+                      style={{ '--value': skill.level }}
+                      aria-label={`${skill.name} ${skill.level}%`}
+                    >
+                      <span className={styles.circularValue}>{skill.level}%</span>
                     </div>
                   </div>
                 ))}

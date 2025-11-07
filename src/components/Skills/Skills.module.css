@@ -1,5 +1,5 @@
 .skills {
-  padding: 5rem 0;
+  padding: 4rem 0;
   background: var(--color-bg);
 }
 
@@ -31,14 +31,14 @@
 
 .skillGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
 }
 
 .skillCategory {
   background: white;
-  padding: 2rem;
-  border-radius: 1rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
   border: 1px solid var(--color-border-soft);
   box-shadow: 0 10px 30px rgba(100, 116, 139, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -65,61 +65,76 @@
 
 .skillItem {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
-.skillHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
-}
+/* header removed in favor of circle layout */
 
 .skillName {
   font-weight: 500;
   color: var(--color-text);
 }
 
-.skillPercentage {
-  font-weight: 600;
-  color: var(--color-accent);
+/* percentage displayed inside circular meter */
+
+/* Circular percentage meter */
+.circularMeter {
+  --size: 45px;
+  --thickness: 2.5px;
+  --dash: 8deg; /* dash arc size */
+  --gap: 4deg;  /* gap arc size */
+  --value: 0; /* set inline as 0-100 */
+  --fill: var(--color-accent);
+  --track: var(--color-surface-alt);
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  /* dashed track around full ring */
+  background: repeating-conic-gradient(
+    var(--track) 0 var(--dash),
+    transparent var(--dash) calc(var(--dash) + var(--gap))
+  );
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.25);
 }
 
-.skillBar {
-  width: 100%;
-  height: 10px;
-  background: var(--color-surface-alt);
-  border-radius: 999px;
-  overflow: hidden;
+/* inner hole */
+.circularMeter::before {
+  content: '';
+  position: absolute;
+  inset: var(--thickness);
+  background: white; /* match card background */
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px var(--color-border-soft);
+  z-index: 1;
 }
 
-.skillProgress {
-  height: 100%;
-  background: linear-gradient(90deg, var(--color-accent), var(--color-secondary));
-  border-radius: 999px;
-  transition: width 1.5s ease-out;
-  animation: slideIn 1.5s ease-out;
-  box-shadow: 0 10px 20px rgba(6, 182, 212, 0.4);
+/* dashed progress overlay clipped to percentage */
+.circularMeter::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    var(--fill) 0 var(--dash),
+    transparent var(--dash) calc(var(--dash) + var(--gap))
+  );
+  -webkit-mask: conic-gradient(#000 0 calc(var(--value) * 1%), transparent 0);
+  mask: conic-gradient(#000 0 calc(var(--value) * 1%), transparent 0);
+  z-index: 0; /* keep under the inner hole and value */
 }
 
-@keyframes slideIn {
-  from {
-    width: 0%;
-  }
-  to {
-    width: var(--progress-width);
-  }
-}
-
-.skillCategory:nth-child(1) .skillProgress {
-  animation-delay: 0.2s;
-}
-
-.skillCategory:nth-child(2) .skillProgress {
-  animation-delay: 0.4s;
-}
-
-.skillCategory:nth-child(3) .skillProgress {
-  animation-delay: 0.6s;
+.circularValue {
+  position: absolute;
+  font-weight: 700;
+  color: #6836b9; /* purple */
+  font-size: 0.85rem;
+  z-index: 2;
 }
 
 @media (max-width: 768px) {
@@ -133,6 +148,25 @@
   }
 
   .skillCategory {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    border-radius: 0.65rem;
+  }
+
+  .circularMeter {
+    --size: 40px;
+    --thickness: 2.5px;
+  }
+
+  .circularValue {
+    font-size: 0.75rem;
+  }
+
+  /* extra mobile compaction */
+  .skills {
+    padding: 3rem 0;
+  }
+
+  .skillItem {
+    gap: 0.5rem;
   }
 }

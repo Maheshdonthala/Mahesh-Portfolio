@@ -74,26 +74,13 @@ const Hero = () => {
           </div>
 
           <p className={styles.heroDescription}>
-            Highly motivated Software Engineering graduate with strong proficiency in SQL, Shell
+            Highly motivated Software Engineering graduate with strong proficiency in Java, Spring Boot, SQL, Shell
 Scripting, Linux and AWS. Eager to apply academic knowledge and technical skills in an
 entry-level software engineering role. Demonstrated ability to coding, problem-solving
 skills, teamwork, and aim to contribute to an organization.
           </p>
 
-          <div className={styles.heroStats}>
-            <div className={styles.stat}>
-              <span className={styles.statNumber}>5+</span>
-              <span className={styles.statLabel}>Certifications</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statNumber}>3+</span>
-              <span className={styles.statLabel}>Projects</span>
-            </div>
-            <div className={styles.stat}>
-              <span className={styles.statNumber}>23</span>
-              <span className={styles.statLabel}>Years Old</span>
-            </div>
-          </div>
+          {/* Stats removed per request */}
 
           <div className={styles.heroButtons}>
             <button className={styles.primaryButton} onClick={scrollToContact}>

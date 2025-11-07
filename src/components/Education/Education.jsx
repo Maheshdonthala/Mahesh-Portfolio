@@ -19,7 +19,7 @@ const Education = () => {
         'Learned software engineering principles',
         'Developed problem-solving skills'
       ],
-      color: '#8b5cf6'
+  color: '#6d28d9'
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ const Education = () => {
         'Developed technical drawing skills',
         'Gained workshop experience'
       ],
-      color: '#5b21b6'
+  color: '#6d28d9'
     },
     {
       id: 3,
@@ -51,7 +51,7 @@ const Education = () => {
         'Developed analytical thinking',
         'Built strong academic foundation'
       ],
-      color: '#4c1d95'
+  color: '#6d28d9'
     }
   ];
 
@@ -88,7 +88,6 @@ const Education = () => {
               className={`${styles.tab} ${activeTab === tab.id ? styles.active : ''}`}
               onClick={() => setActiveTab(tab.id)}
             >
-              <i className={tab.icon}></i>
               <span>{tab.label}</span>
             </button>
           ))}
@@ -98,13 +97,24 @@ const Education = () => {
           {filteredEducation.map((item, index) => (
             <div key={item.id} className={styles.educationCard}>
               <div className={styles.cardHeader}>
-                <div className={styles.iconContainer} style={{backgroundColor: item.color}}>
-                  <i className={item.icon}></i>
-                </div>
                 <div className={styles.cardInfo}>
                   <h3 className={styles.position}>{item.position}</h3>
                   <p className={styles.company}>{item.company}</p>
                   <span className={styles.duration}>{item.duration}</span>
+                </div>
+                <div className={styles.headerRight}>
+                  {(() => {
+                    const progress = 90 - index * 5;
+                    return (
+                      <div
+                        className={styles.circularMeter}
+                        style={{ '--value': progress, '--fill': item.color, '--size': '40px', '--thickness': '3px' }}
+                        aria-label={`Progress ${progress}%`}
+                      >
+                        <span className={styles.circularValue}>{progress}%</span>
+                      </div>
+                    );
+                  })()}
                 </div>
               </div>
 
@@ -121,17 +131,7 @@ const Education = () => {
                 </div>
               </div>
 
-              <div className={styles.cardFooter}>
-                <div className={styles.progressBar}>
-                  <div 
-                    className={styles.progress} 
-                    style={{
-                      width: `${90 - index * 5}%`,
-                      backgroundColor: item.color
-                    }}
-                  ></div>
-                </div>
-              </div>
+              {/* Footer progress moved beside duration */}
             </div>
           ))}
         </div>
