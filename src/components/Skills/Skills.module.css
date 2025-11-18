@@ -1,3 +1,35 @@
+@media (max-width: 520px) {
+  .skills {
+    padding: 1.2rem 0;
+  }
+  .container {
+    padding: 0 0.5rem;
+  }
+  .title {
+    font-size: 1.25rem;
+  }
+  .skillGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .skillCategory {
+    padding: 0.7rem;
+    border-radius: 0.5rem;
+  }
+  .skillItem {
+    gap: 0.3rem;
+  }
+  .circularMeter {
+    --size: 32px;
+    --thickness: 2px;
+  }
+  .circularValue {
+    font-size: 0.65rem;
+  }
+  .categoryTitle {
+    font-size: 1rem;
+  }
+}
 .skills {
   padding: 4rem 0;
   background: var(--color-bg);

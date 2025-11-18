@@ -1,3 +1,40 @@
+@media (max-width: 520px) {
+  .projects {
+    padding: 1.2rem 0;
+  }
+  .container {
+    padding: 0 0.5rem;
+  }
+  .title {
+    font-size: 1.25rem;
+  }
+  .projectGrid {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+  .projectCard {
+    padding: 0.5rem 0.3rem;
+    max-width: 100%;
+    border-radius: 0.5rem;
+  }
+  .projectImage {
+    height: 60px;
+  }
+  .projectContent {
+    padding: 0.4rem 0.3rem;
+  }
+  .projectTitle {
+    font-size: 1rem;
+  }
+  .projectDescription {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+  .techTag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+  }
+}
 .projects {
   padding: 5rem 0;
   background: var(--color-bg);
