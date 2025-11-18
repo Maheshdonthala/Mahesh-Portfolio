@@ -102,20 +102,6 @@ const Education = () => {
                   <p className={styles.company}>{item.company}</p>
                   <span className={styles.duration}>{item.duration}</span>
                 </div>
-                <div className={styles.headerRight}>
-                  {(() => {
-                    const progress = 90 - index * 5;
-                    return (
-                      <div
-                        className={styles.circularMeter}
-                        style={{ '--value': progress, '--fill': item.color, '--size': '40px', '--thickness': '3px' }}
-                        aria-label={`Progress ${progress}%`}
-                      >
-                        <span className={styles.circularValue}>{progress}%</span>
-                      </div>
-                    );
-                  })()}
-                </div>
               </div>
 
               <div className={styles.cardContent}>

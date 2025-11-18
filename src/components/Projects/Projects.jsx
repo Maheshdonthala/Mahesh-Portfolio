@@ -85,6 +85,7 @@ const Projects = () => {
                 <img 
                   src={project.image} 
                   alt={project.title}
+                  loading="lazy"
                   className={styles.projectImg}
                   onError={(e) => {
                     e.target.style.display = 'none';

@@ -5,7 +5,7 @@ const Achievements = () => {
   const items = [
     {
       title: 'NCC A-Certificate',
-      year: '2025',
+      year: '2016',
       org: 'National Cadet Corps (NCC)',
       icon: 'fas fa-medal',
       description:

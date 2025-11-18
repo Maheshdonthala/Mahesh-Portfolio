@@ -6,7 +6,7 @@
   background: var(--color-bg);
   position: relative;
   overflow: hidden;
-  padding: 4rem 0;
+  padding: 6.5rem 0 4rem; /* extra top space below fixed header */
 }
 
 .heroContainer {
@@ -57,35 +57,63 @@
   font-weight: 800;
   margin-bottom: 1rem;
   line-height: 1;
+  position: relative;
 }
 
 .name {
   color: var(--color-text);
   display: block;
+  position: relative;
+  overflow: hidden;
 }
 
 .lastname {
   color: var(--color-accent);
   display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sweeping shine effect */
+.name::after,
+.lastname::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(115deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.85) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-25deg);
+  animation: shineSweep 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shineSweep {
+  0% { left: -120%; }
+  55% { left: 140%; }
+  100% { left: 140%; }
 }
 
 .roles {
   display: flex;
   align-items: center;
-  gap: 1rem;
   margin-bottom: 2rem;
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 600;
+  min-height: 1.4em;
 }
-
-.role {
-  color: var(--color-text-muted);
+.dynamicRole {
+  /* ensure only first three animate if more added */
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dark));
+  -webkit-background-clip: text;
+  color: transparent;
+  position: relative;
 }
-
-.divider {
-  color: var(--color-accent);
-  font-weight: bold;
-}
+.roleFadeIn { animation: roleFadeIn 0.4s ease forwards; }
+.roleFadeOut { animation: roleFadeOut 0.25s ease forwards; }
+@keyframes roleFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes roleFadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-6px); } }
 
 .heroDescription {
   font-size: 1.1rem;
@@ -198,17 +226,16 @@
 }
 
 .profilePhoto {
-  /* Show full image without cropping */
   width: auto;
   height: auto;
-  max-width: 560px;
-  max-height: 460px; /* reduced height cap for a shorter photo */
-  border-radius: 40px;
-  object-fit: contain; /* ensure the entire photo is visible */
+  max-width: 520px;
+  max-height: 440px;
+  border-radius: 36px;
+  object-fit: contain;
   display: block;
-  box-shadow: none !important;
   position: relative;
   margin-top: -0.2rem;
+  animation: photoPulse 8s ease-in-out infinite;
 }
 
 /* Removed pseudo-element to eliminate any shadow-like effects */
@@ -237,31 +264,31 @@
 .skillBadges {
   display: flex;
   justify-content: flex-start;
-  gap: 1rem;
-  margin-top: calc(2rem + 2px); /* moved 1 inch (96px) up */
+  gap: 0.75rem;
+  margin-top: 1.75rem;
   flex-wrap: wrap;
 }
 
 .badge {
-  background: rgba(124, 58, 237, 0.12);
+  background: radial-gradient(circle at 30% 30%, rgba(124,58,237,0.22), rgba(124,58,237,0.1));
   color: var(--color-accent);
-  padding: 0.5rem 1rem;
-  border-radius: 2rem;
-  font-size: 0.9rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 1.5rem;
+  font-size: 0.8rem;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   border: 1px solid rgba(124, 58, 237, 0.35);
+  opacity: 0;
+  transform: translateY(8px) scale(.95);
+  animation: badgePop .6s ease forwards;
 }
 
 /* Floating Elements */
 .floatingElements {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   pointer-events: none;
   z-index: 1;
 }
@@ -305,52 +332,21 @@
   50% { transform: translateY(-20px) rotate(5deg); }
 }
 
-/* Scroll Indicator */
-.scrollIndicator {
+/* Animated backdrop & auxiliary animations */
+.hero::before {
+  content: '';
   position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-  animation: bounce 2s infinite;
+  inset: 0;
+  background: radial-gradient(circle at 25% 35%, rgba(124,58,237,0.35), transparent 60%),
+              radial-gradient(circle at 75% 65%, rgba(6,182,212,0.35), transparent 60%);
+  opacity: .35;
+  animation: backdropShift 14s linear infinite;
 }
+@keyframes backdropShift { 0% { filter: hue-rotate(0deg); } 50% { filter: hue-rotate(35deg); } 100% { filter: hue-rotate(0deg); } }
+@keyframes badgePop { 0% { opacity: 0; transform: translateY(10px) scale(.9); } 60% { opacity: 1; transform: translateY(-2px) scale(1.05); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes photoPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.35); } 50% { box-shadow: 0 0 0 14px rgba(124,58,237,0); } }
 
-.scrollMouse {
-  width: 24px;
-  height: 36px;
-  border: 2px solid var(--color-text-muted);
-  border-radius: 12px;
-  margin-bottom: 0.5rem;
-  position: relative;
-}
-
-.scrollWheel {
-  width: 4px;
-  height: 8px;
-  background: var(--color-accent);
-  border-radius: 2px;
-  position: absolute;
-  top: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: scroll 2s infinite;
-}
-
-@keyframes scroll {
-  0% { opacity: 0; transform: translateX(-50%) translateY(0); }
-  50% { opacity: 1; transform: translateX(-50%) translateY(6px); }
-  100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-  40% { transform: translateX(-50%) translateY(-10px); }
-  60% { transform: translateX(-50%) translateY(-5px); }
-}
+/* Scroll indicator removed per request */
 
 /* Responsive Design */
 @media (max-width: 1024px) {
@@ -416,7 +412,7 @@
 
   /* Make hero section more compact on phones */
   .hero {
-    padding: 3rem 0;
+    padding: 6rem 0 3rem; /* maintain header clearance on mobile */
   }
 
   /* Ensure the photo fits smaller screens fully */

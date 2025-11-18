@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styles from './Skills.module.css';
 
 const Skills = () => {
@@ -41,8 +41,27 @@ const Skills = () => {
     }
   ];
 
+  const sectionRef = useRef(null);
+  const [playAnim, setPlayAnim] = useState(false);
+
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setPlayAnim(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="skills" className={styles.skills}>
+    <section id="skills" className={styles.skills} ref={sectionRef}>
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.title}>Skills & Expertise</h2>
@@ -59,7 +78,7 @@ const Skills = () => {
                     <span className={styles.skillName}>{skill.name}</span>
                     <div
                       className={styles.circularMeter}
-                      style={{ '--value': skill.level }}
+                      style={playAnim ? { '--value': skill.level, '--delay': `${skillIndex * 0.12}s` } : { '--value': 0 }}
                       aria-label={`${skill.name} ${skill.level}%`}
                     >
                       <span className={styles.circularValue}>{skill.level}%</span>

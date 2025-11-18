@@ -133,17 +133,7 @@ const Experience = () => {
                 </div>
               </div>
 
-              <div className={styles.cardFooter}>
-                <div className={styles.progressBar}>
-                  <div
-                    className={styles.progressFill}
-                    style={{
-                      backgroundColor: exp.color,
-                      width: exp.type === 'training' ? '90%' : '70%'
-                    }}
-                  ></div>
-                </div>
-              </div>
+              {/* Progress bar removed as requested */}
             </div>
           ))}
         </div>

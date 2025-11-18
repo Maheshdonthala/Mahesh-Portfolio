@@ -4,10 +4,28 @@ import profileImage from '../../images/profile.png';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const roles = [
+    'Developer',
+    'DevOps Engineer',
+    'Site Reliability Engineer'
+  ];
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [roleFade, setRoleFade] = useState(true);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleFade(false);
+      setTimeout(() => {
+        setRoleIndex(prev => (prev + 1) % roles.length);
+        setRoleFade(true);
+      }, 250);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [roles.length]);
 
   const scrollToContact = () => {
     const element = document.getElementById('contact');
@@ -56,7 +74,6 @@ const Hero = () => {
         {/* Right Side - Content */}
         <div className={`${styles.heroContent} ${isVisible ? styles.fadeInRight : ''}`}>
           <div className={styles.greeting}>
-            <span className={styles.wave}>👋</span>
             <span>Hello, I'm</span>
           </div>
 
@@ -65,12 +82,8 @@ const Hero = () => {
             <span className={styles.lastname}>DONTHALA</span>
           </h1>
 
-          <div className={styles.roles}>
-            <span className={styles.role}>Developer</span>
-            <span className={styles.divider}>|</span>
-            <span className={styles.role}>DevOps Engineer</span>
-            <span className={styles.divider}>|</span>
-            <span className={styles.role}>Site Reliability Engineer</span>
+          <div className={styles.roles} aria-live="polite" aria-label="Current professional role">
+            <span className={`${styles.dynamicRole} ${roleFade ? styles.roleFadeIn : styles.roleFadeOut}`}>{roles[roleIndex]}</span>
           </div>
 
           <p className={styles.heroDescription}>
@@ -102,13 +115,7 @@ skills, teamwork, and aim to contribute to an organization.
         <div className={styles.floatingTriangle}></div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className={styles.scrollIndicator}>
-        <div className={styles.scrollMouse}>
-          <div className={styles.scrollWheel}></div>
-        </div>
-        <span>Scroll to explore</span>
-      </div>
+      {/* Scroll indicator removed per request */}
     </section>
   );
 };
